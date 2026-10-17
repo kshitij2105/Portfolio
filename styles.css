@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 260 20% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 260 20% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 20% 15%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 260 30% 96%;
+    --secondary-foreground: 260 20% 15%;
+    --muted: 260 10% 94%;
+    --muted-foreground: 260 10% 45%;
+    --accent: 262 83% 95%;
+    --accent-foreground: 262 83% 40%;
+    --border: 260 20% 90%;
+    --input: 260 20% 90%;
+    --ring: 262 83% 58%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 260 25% 10%;
+    --foreground: 260 10% 95%;
+    --card: 260 22% 14%;
+    --card-foreground: 260 10% 95%;
+    --popover: 260 22% 14%;
+    --popover-foreground: 260 10% 95%;
+    --primary: 262 83% 65%;
+    --primary-foreground: 260 25% 10%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 260 10% 95%;
+    --muted: 260 20% 22%;
+    --muted-foreground: 260 15% 65%;
+    --accent: 262 50% 22%;
+    --accent-foreground: 262 83% 80%;
+    --border: 260 20% 22%;
+    --input: 260 20% 22%;
+    --ring: 262 83% 65%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-violet-500 selection:text-white;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
