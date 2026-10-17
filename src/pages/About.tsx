@@ -66,9 +66,11 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-border/80 shadow-2xl bg-secondary flex items-center justify-center">
-                <div className="absolute inset-0 bg-violet-600/10 flex items-center justify-center">
-                  <span className="font-serif text-6xl font-bold text-violet-600/35">KB</span>
-                </div>
+                <img
+                  src="/IMG_5247.PNG"
+                  alt="Kshitij Bhalerao"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-violet-950/80 via-transparent to-transparent flex items-end p-8">
                   <div className="text-white">
                     <p className="font-serif text-xl font-bold">Kshitij Bhalerao</p>
