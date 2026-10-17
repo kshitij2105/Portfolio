@@ -6,10 +6,7 @@ const OpenAI = require('openai');
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
-const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'http://localhost:5173')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+const allowedOrigin = process.env.FRONTEND_ORIGIN;
 const requestCounts = new Map();
 const rateWindowMs = 15 * 60 * 1000;
 const maxRequestsPerWindow = 20;
@@ -19,11 +16,12 @@ const maxHistoryMessageLength = 2000;
 
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    if (!origin || origin === allowedOrigin) return callback(null, true);
     return callback(new Error('Origin is not allowed by CORS'));
   },
-  methods: ['POST', 'GET'],
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 204,
 }));
 app.use(express.json({ limit: '16kb' }));
 
