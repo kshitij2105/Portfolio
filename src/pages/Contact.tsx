@@ -27,11 +27,14 @@ export default function Contact() {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(import.meta.env.VITE_CONTACT_API_URL || '/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+  `${import.meta.env.VITE_API_URL || 'https://portfolio-two-ruddy-976dav05qc.vercel.app'}/api/contact`,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  }
+);
       const result = await response.json();
 
       if (!response.ok) {
