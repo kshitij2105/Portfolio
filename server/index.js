@@ -246,6 +246,64 @@ If any part of the response is unnecessary, remove it before replying.
 
 /* -------------------- CHAT ENDPOINT -------------------- */
 
+app.post('/api/contact', async (request, response) => {
+  const { name, email, message } = request.body ?? {};
+  const trimmedName = typeof name === 'string' ? name.trim() : '';
+  const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+  const trimmedMessage = typeof message === 'string' ? message.trim() : '';
+
+  if (
+    !trimmedName || trimmedName.length > 120 ||
+    !trimmedEmail || trimmedEmail.length > 254 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail) ||
+    !trimmedMessage || trimmedMessage.length > 5000
+  ) {
+    return response.status(400).json({
+      error: 'Please provide a valid name, email address, and message (up to 5,000 characters).',
+    });
+  }
+
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not configured.');
+    return response.status(503).json({
+      error: 'Email delivery is not configured yet. Please email Kshitij directly.',
+    });
+  }
+
+  try {
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: process.env.CONTACT_FROM_EMAIL || 'Portfolio Contact <onboarding@resend.dev>',
+        to: [process.env.CONTACT_TO_EMAIL || 'kshitijbhalerao215@gmail.com'],
+        reply_to: trimmedEmail,
+        subject: `Portfolio contact from ${trimmedName.replace(/[\r\n]/g, ' ')}`,
+        text: `Name: ${trimmedName}\nEmail: ${trimmedEmail}\n\n${trimmedMessage}`,
+      }),
+    });
+
+    if (!resendResponse.ok) {
+      console.error('Resend email request failed with status:', resendResponse.status);
+      return response.status(502).json({
+        error: 'The message could not be sent right now. Please try again later.',
+      });
+    }
+
+    return response.json({ message: 'Message sent successfully.' });
+  } catch (error) {
+    console.error('Contact email error:', error.message);
+    return response.status(502).json({
+      error: 'The message could not be sent right now. Please try again later.',
+    });
+  }
+});
+
+/* -------------------- CHAT ENDPOINT -------------------- */
+
 app.post('/api/chat', async (request, response) => {
   try {
     const { question, history } = request.body ?? {};

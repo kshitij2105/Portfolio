@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
-import { Linkedin, MapPin, Send, Sparkles, Phone } from 'lucide-react';
+import { Linkedin, Mail, MapPin, Send, Sparkles } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export default function Contact() {
@@ -18,19 +18,33 @@ export default function Contact() {
     }
   }, [darkMode]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast.error('Please fill in all fields before sending.');
       return;
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch(import.meta.env.VITE_CONTACT_API_URL || '/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(typeof result.error === 'string' ? result.error : 'The message could not be sent. Please try again.');
+      }
+
       toast.success('Message sent successfully! Kshitij will get back to you soon.');
       setFormData({ name: '', email: '', message: '' });
-    }, 1000);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'The message could not be sent. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -66,9 +80,14 @@ export default function Contact() {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-violet-600/10 text-violet-600 dark:text-violet-400 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5" />
+                    <Mail className="w-5 h-5" />
                   </div>
-                  
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">Email</p>
+                    <a href="mailto:kshitijbhalerao215@gmail.com" className="font-serif text-lg font-bold hover:text-violet-600 transition-colors">
+                      kshitijbhalerao215@gmail.com
+                    </a>
+                  </div>
                 </div>
 
                 <div className="flex items-start gap-4">

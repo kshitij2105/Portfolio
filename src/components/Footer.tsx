@@ -75,7 +75,6 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-6">
             <span className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</span>
             <span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span>
-            <span className="text-violet-600 dark:text-violet-400 font-medium">Violet Edition</span>
           </div>
         </div>
       </div>
