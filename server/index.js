@@ -287,11 +287,14 @@ app.post('/api/contact', async (request, response) => {
     });
 
     if (!resendResponse.ok) {
-      console.error('Resend email request failed with status:', resendResponse.status);
-      return response.status(502).json({
-        error: 'The message could not be sent right now. Please try again later.',
-      });
-    }
+  const resendError = await resendResponse.text();
+
+  console.error('Resend error:', resendResponse.status, resendError);
+
+  return response.status(502).json({
+    error: 'Email delivery failed. Please check the server logs.',
+  });
+}
 
     return response.json({ message: 'Message sent successfully.' });
   } catch (error) {
