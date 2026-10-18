@@ -17,8 +17,20 @@ export default function Home() {
   }, [darkMode]);
 
   const projects = [
+
+    
+{
+  id: 1,
+  title: 'Clinic Website & Deployment',
+  category: 'Web Development',
+  link: 'https://dr-shraddha-wanje.vercel.app/',
+  image: 'https://placehold.co/1000x400',
+  description: 'Developed and deployed a professional clinic website for Dr. Shraddha Wanje, providing an online presence for clinic information and services with a responsive user interface and modern web technologies.',
+  tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel']
+},
+
     {
-      id: 1,
+      id: 2,
       title: 'AI RAG Chatbot & Knowledge Assistant',
       category: 'AI / RAG',
       image: 'https://placehold.co/1000x400',
@@ -26,7 +38,7 @@ export default function Home() {
       tags: ['Python', 'LangChain', 'Vector DB', 'OpenAI', 'LLM']
     },
     {
-      id: 2,
+      id: 3,
       title: 'End-to-End CI/CD Pipeline with Kubernetes & AWS',
       category: 'DevOps',
       image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80',
@@ -34,7 +46,7 @@ export default function Home() {
       tags: ['GitHub Actions', 'Docker', 'Kubernetes', 'AWS', 'Helm']
     },
     {
-      id: 3,
+      id: 4,
       title: 'Infrastructure-as-Code Provisioning with Terraform & Ansible',
       category: 'Cloud',
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80',
@@ -42,7 +54,7 @@ export default function Home() {
       tags: ['Terraform', 'Ansible', 'AWS', 'Bash']
     },
     {
-      id: 4,
+      id: 5,
       title: 'Centralized Monitoring & Log Aggregation Platform',
       category: 'Systems',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80',
@@ -98,7 +110,7 @@ export default function Home() {
                 rel="noreferrer"
                 className="px-8 py-4 rounded-full border border-border/80 bg-secondary/30 font-medium hover:bg-secondary transition-all duration-300"
               >
-                LinkedIn Profile (+91-9579653106)
+                LinkedIn Profile
               </a>
             </div>
           </motion.div>
@@ -159,7 +171,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project, index) => {
+              const card = (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -209,7 +222,20 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+              );
+
+              return project.link ? (
+                <a
+                  key={project.id}
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block"
+                >
+                  {card}
+                </a>
+              ) : card;
+            })}
           </div>
         </div>
       </section>
@@ -244,7 +270,7 @@ export default function Home() {
               {
                 icon: Code,
                 title: 'Languages & DB',
-                description: 'Python, JavaScript, Node.js, MongoDB, MySQL.'
+                description: 'Python, JavaScript, TypeScript, React.js, Node.js, MongoDB, MySQL.'
               },
               {
                 icon: ShieldCheck,

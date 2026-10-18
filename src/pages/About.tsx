@@ -75,7 +75,7 @@ export default function About() {
                   <div className="text-white">
                     <p className="font-serif text-xl font-bold">Kshitij Bhalerao</p>
                     <p className="text-sm text-violet-200">DevOps & AI Engineer • TCS</p>
-                    <p className="text-xs text-violet-300 mt-1">+91-9579653106 | Pune, India</p>
+                    <p className="text-xs text-violet-300 mt-1">Pune, India</p>
                   </div>
                 </div>
               </div>

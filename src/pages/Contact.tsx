@@ -68,12 +68,7 @@ export default function Contact() {
                   <div className="w-12 h-12 rounded-2xl bg-violet-600/10 text-violet-600 dark:text-violet-400 flex items-center justify-center shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Phone</p>
-                    <a href="tel:+919579653106" className="font-serif text-lg font-bold hover:text-violet-600 transition-colors">
-                      +91-9579653106
-                    </a>
-                  </div>
+                  
                 </div>
 
                 <div className="flex items-start gap-4">
