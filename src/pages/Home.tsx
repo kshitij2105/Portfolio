@@ -24,7 +24,7 @@ export default function Home() {
   title: 'Clinic Website & Deployment',
   category: 'Web Development',
   link: 'https://dr-shraddha-wanje.vercel.app/',
-  image: 'https://placehold.co/1000x400',
+  image: 'https://dr-shraddha-wanje.vercel.app/dr-shraddha-wanje.jpg',
   description: 'Developed and deployed a professional clinic website for Dr. Shraddha Wanje, providing an online presence for clinic information and services with a responsive user interface and modern web technologies.',
   tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vercel']
 },
